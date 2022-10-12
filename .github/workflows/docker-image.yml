@@ -13,18 +13,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag sa-auth-service:$(date +%s)
-      
+
     - uses: actions/checkout@v3
     - name: docker login
-      env:
-        DOCKER_USER: ${{secrets.DOCKER_USER}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        
-      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
-      
+      with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+              
     - uses: actions/checkout@v3
     - name: push into docker hub
-      run: docker push ${{secrets.DOCKER_USER}}/sa-auth-service
+      with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sa-auth-service:latest

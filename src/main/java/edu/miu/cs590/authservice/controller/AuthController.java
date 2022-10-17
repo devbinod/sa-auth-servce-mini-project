@@ -50,6 +50,7 @@ public class AuthController {
                     .accountNonExpired(user.isAccountNonExpired())
                     .accountNonLocked(user.isAccountNonLocked())
                     .credentialsNonExpired(user.isCredentialsNonExpired())
+                    .username(user.getUsername())
                     .enabled(user.isEnabled())
                     .token(token).build();
 

@@ -31,6 +31,14 @@ public class AuthController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/")
+    public ResponseEntity<?> health1() {
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "OK");
+        return ResponseEntity.ok(response);
+    }
+
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/health")

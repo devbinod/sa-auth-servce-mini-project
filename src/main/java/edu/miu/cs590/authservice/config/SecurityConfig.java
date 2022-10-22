@@ -32,13 +32,15 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        return http.cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .addFilterAfter(jwtTokenFilter, BasicAuthenticationFilter.class)
+        return http
+//                .cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//                .addFilterAfter(jwtTokenFilter, BasicAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/api/auth/**","/api/verity-token", "/actuator/**", "/health").permitAll()
-                .antMatchers("/api/**").authenticated()
-                .anyRequest()
-                .authenticated().and().build();
+                .anyRequest().permitAll()
+
+//                .antMatchers("/api/auth/**","/api/verity-token", "/actuator/**", "/health").permitAll()
+//                .antMatchers("/api/**").authenticated()
+                .and().build();
     }
 
 

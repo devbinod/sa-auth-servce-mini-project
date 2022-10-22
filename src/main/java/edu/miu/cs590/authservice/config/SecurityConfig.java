@@ -35,7 +35,7 @@ public class SecurityConfig {
         return http.cors().and().csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .addFilterAfter(jwtTokenFilter, BasicAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers("/api/auth/**","/api/verity-token").permitAll()
+                .antMatchers("/api/auth/**","/api/verity-token", "/actuator/**", "/health").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .anyRequest()
                 .authenticated().and().build();

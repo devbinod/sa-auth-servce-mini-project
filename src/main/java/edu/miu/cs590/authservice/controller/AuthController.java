@@ -13,9 +13,10 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 //@RequestMapping("/v1/auth")
@@ -31,6 +32,13 @@ public class AuthController {
     private JwtTokenUtil jwtTokenUtil;
 
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/health")
+    public ResponseEntity<?> health() {
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "OK");
+        return ResponseEntity.ok(response);
+    }
     @PostMapping("/api/auth/login")
     public ResponseEntity<?> auth(@RequestBody LoginDto loginDto) {
 
